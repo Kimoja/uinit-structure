@@ -1,0 +1,18 @@
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Lint/EmptyClass:
+  Enabled: false

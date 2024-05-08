@@ -28,8 +28,10 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'zeitwerk', '~> 2.6'
 
+  spec.add_dependency 'uinit-memoizable', '~> 0.1.0'
+  spec.add_dependency 'uinit-type', '~> 0.1.0'
+
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'
   spec.metadata['rubygems_mfa_required'] = 'true'

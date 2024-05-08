@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-module CheerzOnRails
+module Uinit
   module Structure
     module Compilers
       class Constructor < Base
-
         def initialize(mod, schema)
           super(mod)
 
@@ -17,8 +16,8 @@ module CheerzOnRails
         def compile
           compile_method(<<~RUBY, __FILE__, __LINE__ + 1)
             def initialize_structure!(hsh)
-              #{ compile_super }
-              #{ compile_attribute_initializers * "\n" }
+              #{compile_super}
+              #{compile_attribute_initializers * "\n"}
             end
           RUBY
         end
@@ -59,27 +58,26 @@ module CheerzOnRails
 
         def compile_non_optional_attribute(name)
           <<~RUBY
-            raise ArgumentError, "'#{ name }' must be defined" unless hsh.key?(:#{ name })
-            self.#{ name } = hsh[:#{ name }]
+            raise ArgumentError, "'#{name}' must be defined" unless hsh.key?(:#{name})
+            self.#{name} = hsh[:#{name}]
           RUBY
         end
 
         def compile_optional_attribute(name, attribute)
           <<~RUBY
-            if hsh.key?(:#{ name })
-              self.#{ name } = hsh[:#{ name }]
+            if hsh.key?(:#{name})
+              self.#{name} = hsh[:#{name}]
             else
-              #{ compile_default_attribute(name, attribute) }
+              #{compile_default_attribute(name, attribute)}
             end
           RUBY
         end
 
         def compile_default_attribute(name, attribute)
           <<~RUBY
-            self.#{ name } = _structure_schema.#{ name }.default#{ attribute.default.is_a?(Proc) ? ".call" : "" }
+            self.#{name} = _structure_schema.#{name}.default#{attribute.default.is_a?(Proc) ? '.call' : ''}
           RUBY
         end
-
       end
     end
   end

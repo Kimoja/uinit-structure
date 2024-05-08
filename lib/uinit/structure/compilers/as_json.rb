@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-module CheerzOnRails
+module Uinit
   module Structure
     module Compilers
       class AsJson < Base
-
         def initialize(mod, schema)
           super(mod)
 
@@ -17,8 +16,8 @@ module CheerzOnRails
         def compile
           compile_method(<<~RUBY, __FILE__, __LINE__ + 1)
             def as_json
-              #{ compile_super }
-              #{ compile_json_attributes * "\n" }
+              #{compile_super}
+              #{compile_json_attributes * "\n"}
               json
             end
           RUBY
@@ -64,34 +63,33 @@ module CheerzOnRails
 
         def compile_json_struct(name)
           <<~RUBY
-            json[:#{ name }] = self.#{ name }.nil? ? nil : self.#{ name }.as_json
+            json[:#{name}] = self.#{name}.nil? ? nil : self.#{name}.as_json
           RUBY
         end
 
         def compile_json_array_struct(name)
           <<~RUBY
-            json[:#{ name }] = self.#{ name }.nil? ? nil : self.#{ name }.map(&:as_json)
+            json[:#{name}] = self.#{name}.nil? ? nil : self.#{name}.map(&:as_json)
           RUBY
         end
 
         def compile_json_true(name)
           <<~RUBY
-            json[:#{ name }] = self.#{ name }
+            json[:#{name}] = self.#{name}
           RUBY
         end
 
         def compile_json_sym(name, sym)
           <<~RUBY
-            json[:#{ name }] = self.#{ name }.#{ sym }
+            json[:#{name}] = self.#{name}.#{sym}
           RUBY
         end
 
         def compile_json_proc(name)
           <<~RUBY
-            _structure_schema.#{ name }.as_json.call(json, self.#{ name }, :#{ name })
+            _structure_schema.#{name}.as_json.call(json, self.#{name}, :#{name})
           RUBY
         end
-
       end
     end
   end

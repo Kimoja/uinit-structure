@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-module CheerzOnRails
+module Uinit
   module Structure
     class AttributeTypeError < StandardError
-
       def initialize(attribute, type_error)
         super()
 
@@ -16,9 +15,8 @@ module CheerzOnRails
       attr_reader :attribute, :type_error
 
       def message
-        "Type error on attribute '#{ attribute.name }', detail:\n#{ type_error.message }"
+        "Type error on attribute '#{attribute.name}', detail:\n#{type_error.message}"
       end
-
     end
   end
 end

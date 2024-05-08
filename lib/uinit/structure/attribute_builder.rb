@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-module CheerzOnRails
+module Uinit
   module Structure
     class AttributeBuilder
-
       def initialize(attribute = nil)
         @attribute = attribute || Attribute.new
       end
@@ -117,7 +116,6 @@ module CheerzOnRails
 
         self
       end
-
     end
   end
 end

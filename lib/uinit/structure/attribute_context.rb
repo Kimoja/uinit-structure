@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-module CheerzOnRails
+module Uinit
   module Structure
     module AttributeContext
-
       include Memoizable
       include Type::Context
 
@@ -48,7 +47,6 @@ module CheerzOnRails
 
         builder
       end
-
     end
   end
 end
