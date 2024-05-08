@@ -1,0 +1,3 @@
+# Uinit::Structure
+
+Typed structure
