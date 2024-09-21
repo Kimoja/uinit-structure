@@ -3,11 +3,18 @@
 module Uinit
   module Structure
     class AttributeBuilder
-      def initialize(attribute = nil)
-        @attribute = attribute || Attribute.new
+      def initialize(defaults, attribute = nil)
+        self.attribute = attribute || Attribute.new
+        self.defaults = defaults
+
+        return if attribute
+
+        defaults.each do |(name, value)|
+          self.attribute.send(:"#{name}=", value)
+        end
       end
 
-      attr_accessor :attribute
+      attr_accessor :attribute, :defaults
 
       def attr(name, type = nil, default = Attribute::UNDEFINED, &)
         return build_mutliple(name, type, default, &) if name.is_a?(Array)
@@ -103,7 +110,7 @@ module Uinit
 
       def build_mutliple(name, type, default, &)
         name.map do |nm|
-          builder = AttributeBuilder.new(attribute.clone)
+          builder = AttributeBuilder.new(defaults, attribute.clone)
           builder.attr(nm, type, default, &)
         end
       end
