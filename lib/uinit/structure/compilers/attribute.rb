@@ -180,7 +180,7 @@ module Uinit
         end
 
         def lookup(att = nil)
-          "_structure_schema.#{attribute.name}#{att ? ".#{att}" : ''}"
+          "get_structure_schema.#{attribute.name}#{att ? ".#{att}" : ''}"
         end
       end
       # rubocop:enable Metrics/ClassLength

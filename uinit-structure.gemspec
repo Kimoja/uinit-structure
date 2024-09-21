@@ -26,13 +26,10 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/Kimoja/uinit-structure/blob/main/CHANGELOG.md'
   spec.metadata['bug_tracker_uri'] = 'https://github.com/Kimoja/uinit-structure/issues'
 
-  spec.add_runtime_dependency 'zeitwerk', '~> 2.6'
-
+  spec.add_dependency 'activesupport', '~> 7.1.3'
   spec.add_dependency 'uinit-memoizable', '~> 0.1.0'
   spec.add_dependency 'uinit-type', '~> 0.1.0'
+  spec.add_dependency 'zeitwerk', '~> 2.6'
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

@@ -2,6 +2,8 @@
 
 require 'zeitwerk'
 
+require 'active_support'
+
 require 'uinit/type'
 require 'uinit/memoizable'
 
@@ -14,16 +16,15 @@ end
 
 module Uinit
   module Structure
+    extend ActiveSupport::Concern
     include Memoizable
-
-    def self.included(base)
-      base.extend(ClassMethods)
-    end
 
     class Schema; end
 
-    module ClassMethods
+    class_methods do
       include Memoizable
+
+      attr_reader :attributes
 
       memo def structure_schema
         if respond_to?(:superclass) && superclass.respond_to?(:structure_schema)
@@ -42,7 +43,9 @@ module Uinit
       end
 
       def struct(&)
-        AttributeContext.scope(&).each do |attribute|
+        attributes = AttributeContext.scope(&)
+
+        attributes.each do |attribute|
           raise NameError, 'Attribute must have a name' unless attribute.name
 
           structure_schema.class.define_method(attribute.name) { attribute }
@@ -51,11 +54,20 @@ module Uinit
 
         Compilers::Constructor.compile(structure_module, structure_schema)
         Compilers::AsJson.compile(structure_module, structure_schema)
+
+        sup_attributes = superclass < Structure ? superclass.attributes.dup : {}
+
+        self.attributes = attributes.each_with_object(sup_attributes) do |attribute, hsh|
+          hsh[attribute.name] = attribute
+        end
       end
+
+      private
+
+      attr_writer :attributes
     end
 
-    private
-
-    memo def _structure_schema = self.class.structure_schema
+    memo def get_structure_schema = self.class.structure_schema
+    memo def get_attributes = self.class.attributes
   end
 end

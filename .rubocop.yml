@@ -4,15 +4,19 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
-
 Metrics/MethodLength:
   Enabled: false
-
 Metrics/BlockLength:
   Enabled: false
-
-Gemspec/DevelopmentDependencies:
+Style/OptionalBooleanParameter:
   Enabled: false
-
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+Naming/AccessorMethodName:
+  Enabled: false
 Lint/EmptyClass:
   Enabled: false

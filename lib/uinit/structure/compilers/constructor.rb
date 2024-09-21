@@ -75,7 +75,7 @@ module Uinit
 
         def compile_default_attribute(name, attribute)
           <<~RUBY
-            self.#{name} = _structure_schema.#{name}.default#{attribute.default.is_a?(Proc) ? '.call' : ''}
+            self.#{name} = get_structure_schema.#{name}.default#{attribute.default.is_a?(Proc) ? '.call' : ''}
           RUBY
         end
       end
