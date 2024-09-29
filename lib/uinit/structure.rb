@@ -24,7 +24,7 @@ module Uinit
     class_methods do
       include Memoizable
 
-      attr_reader :attributes
+      attr_reader :attributes, :attributes_scope
 
       memo def structure_schema
         if respond_to?(:superclass) && superclass.respond_to?(:structure_schema)
@@ -43,7 +43,8 @@ module Uinit
       end
 
       def struct(&)
-        attributes = AttributeScope.new(self).scope(&).attributes
+        self.attributes_scope = AttributeScope.new(self)
+        attributes = attributes_scope.scope(&).attributes
 
         attributes.each do |attribute|
           raise NameError, 'Attribute must have a name' unless attribute.name
@@ -60,11 +61,13 @@ module Uinit
         self.attributes = attributes.each_with_object(sup_attributes) do |attribute, hsh|
           hsh[attribute.name] = attribute
         end
+
+        self.attributes_scope = nil
       end
 
       private
 
-      attr_writer :attributes
+      attr_writer :attributes, :attributes_scope
     end
 
     memo def get_structure_schema = self.class.structure_schema
