@@ -6,13 +6,6 @@ module Uinit
       include Memoizable
       include Type::Context
 
-      def self.scope(&)
-        context = Class.new { include AttributeContext }.new
-        context.instance_eval(&)
-
-        context.attributes
-      end
-
       memo def attributes = []
 
       def defaults(**defaults)

@@ -9,7 +9,9 @@ RSpec.describe Uinit::Structure do
   module SharedAttributes
     extend Uinit::Structure::AttributeContext
 
-    TypedExplicitOptional = attr(:typed_explicit_optional, int, 12)
+    def self.custo_int = int
+
+    TypedExplicitOptional = attr(:typed_explicit_optional, custo_int, 12)
     TypedNilStr = abstract(none | str)
     TypedBoolExplicitOptional = abstract([bool], proc { [true, false] })
 

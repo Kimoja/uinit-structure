@@ -43,7 +43,7 @@ module Uinit
       end
 
       def struct(&)
-        attributes = AttributeContext.scope(&)
+        attributes = AttributeScope.new(self).scope(&).attributes
 
         attributes.each do |attribute|
           raise NameError, 'Attribute must have a name' unless attribute.name
