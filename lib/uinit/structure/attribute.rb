@@ -91,8 +91,10 @@ module Uinit
       end
 
       def optional?
-        @default != UNDEFINED
+        defined?(@optional) ? @optional : @default != UNDEFINED
       end
+
+      attr_writer :optional
 
       def init=(val)
         raise ArgumentError, 'init must be a boolean' unless [true, false].include?(val)

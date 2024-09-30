@@ -30,9 +30,7 @@ module Uinit
           end
 
           <<~RUBY
-            begin
-              super(hsh)
-            end
+            super(hsh)
           RUBY
         end
 
@@ -75,7 +73,7 @@ module Uinit
 
         def compile_default_attribute(name, attribute)
           <<~RUBY
-            self.#{name} = get_structure_schema.#{name}.default#{attribute.default.is_a?(Proc) ? '.call' : ''}
+            self.#{name} = __structure_schema.#{name}.default#{attribute.default.is_a?(Proc) ? '.call' : ''}
           RUBY
         end
       end

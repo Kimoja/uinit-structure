@@ -70,7 +70,7 @@ module Uinit
       attr_writer :attributes, :attributes_scope
     end
 
-    memo def get_structure_schema = self.class.structure_schema
-    memo def get_attributes = self.class.attributes
+    memo def __structure_schema = self.class.structure_schema
+    memo def __attributes = self.class.attributes
   end
 end

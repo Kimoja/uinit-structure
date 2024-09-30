@@ -87,7 +87,7 @@ module Uinit
 
         def compile_json_proc(name)
           <<~RUBY
-            get_structure_schema.#{name}.as_json.call(json, self.#{name}, :#{name})
+            __structure_schema.#{name}.as_json.call(json, self.#{name}, :#{name})
           RUBY
         end
       end

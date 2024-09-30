@@ -70,8 +70,14 @@ module Uinit
         self
       end
 
-      def optional(val)
+      def optional(val = true)
         attribute.optional = val
+
+        self
+      end
+
+      def required
+        attribute.optional = false
 
         self
       end

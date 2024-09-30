@@ -29,7 +29,7 @@ RSpec.describe Uinit::Structure do
       private(:get).attr(:private_get)
       private(:set).attr(:private_set)
 
-      attr(:untyped)
+      attr(:untyped).required
       attr(:implicit_nil_optional?)
 
       attr(:typed, int).alias(:typed_str, :typed_string)
